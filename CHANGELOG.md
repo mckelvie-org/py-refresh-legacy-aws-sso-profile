@@ -2,7 +2,17 @@
 
 
 
-## v0.0.0 (2024-03-14)
+## v0.3.0 (2024-03-14)
+
+
+## v0.1.1 (2024-03-15)
+
+### Unknown
+
+* v0.1.1 ([`facfa24`](https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile/commit/facfa24502a8a142ae6fea6c849f7fd4f989c018))
+
+
+## v0.1.0 (2024-03-15)
 
 ### Unknown
 
