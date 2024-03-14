@@ -2,7 +2,14 @@
 
 
 
-## v0.3.0 (2024-03-14)
+## v0.4.0 (2024-03-14)
+
+### Unknown
+
+* python version in quotes ([`e5274cb`](https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile/commit/e5274cb252bf4524775d12951a78914f60f0b19c))
+
+
+## v0.3.0 (2024-03-15)
 
 
 ## v0.1.1 (2024-03-15)
