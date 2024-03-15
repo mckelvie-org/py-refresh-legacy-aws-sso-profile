@@ -16,7 +16,7 @@ keywords = [ "AWS", "credentials", "SSO", "login", "token", "authentication", "a
 
 [project.urls]
 homepage = "https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile"
-repository = "https://github.com/sammck/py-refresh-legacy-aws-sso-profile.git"
+repository = "https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile.git"
 
 [build-system]
 requires = ["pdm-backend"]
