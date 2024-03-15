@@ -26,4 +26,4 @@ jobs:
         env:
           PYPI_TOKEN: ${{ secrets.TEST_PYPI_TOKEN }}
         run: |
-          pdm publish -u __token__ -p "$PYPI_TOKEN"
+          pdm publish --repository https://test.pypi.org/legacy/ -u __token__ -P "$PYPI_TOKEN"

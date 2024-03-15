@@ -36,9 +36,13 @@ build_command = "pip install pdm && pdm build"
 [tool.pdm]
 distribution = true
 
+[tool.pdm.build]
+excludes = ["./**/.git"]
+package-dir = "src"
+
+
 [tool.pdm.dev-dependencies]
 dev = [
     "boto3-stubs>=1.34.63",
     "python-semantic-release>=9.1.1",
 ]
-
