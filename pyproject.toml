@@ -14,6 +14,10 @@ readme = "README.md"
 license = {text = "MIT"}
 keywords = [ "AWS", "credentials", "SSO", "login", "token", "authentication", "auth" ]
 
+[project.urls]
+homepage = "https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile"
+repository = "https://github.com/sammck/py-refresh-legacy-aws-sso-profile.git"
+
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
