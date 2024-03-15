@@ -2,7 +2,16 @@
 
 
 
-## v0.5.0 (2024-03-14)
+## v0.6.0 (2024-03-14)
+
+### Unknown
+
+* add homepage and repository urls ([`1dbe568`](https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile/commit/1dbe5686f56daef3b2d10ac2ae3336958a0a31a3))
+
+* add homepage and repository urls ([`ed0d8f8`](https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile/commit/ed0d8f8c449f3af6ac4291d4bd1a084eeef308c7))
+
+
+## v0.5.0 (2024-03-15)
 
 ### Unknown
 
