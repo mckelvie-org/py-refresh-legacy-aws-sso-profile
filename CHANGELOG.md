@@ -2,7 +2,14 @@
 
 
 
-## v0.6.0 (2024-03-14)
+## v1.0.0 (2024-03-14)
+
+### Unknown
+
+* update README ([`0113f5b`](https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile/commit/0113f5bfa13ad5e23386fa2fceb0ea449a5f0f09))
+
+
+## v0.6.0 (2024-03-15)
 
 ### Unknown
 
