@@ -1,6 +1,6 @@
 [project]
 name = "refresh-legacy-aws-sso-profile"
-version = "0.4.0"
+version = "0.5.0"
 description = "A tool to create/refresh a backwards-compatible AWS profile with temporary credentials from a new-style AWS SSO profile."
 authors = [
     {name = "Sam McKelvie", email = "dev@mckelvie.org"},

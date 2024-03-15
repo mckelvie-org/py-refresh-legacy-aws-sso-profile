@@ -2,7 +2,14 @@
 
 
 
-## v0.4.0 (2024-03-14)
+## v0.5.0 (2024-03-14)
+
+### Unknown
+
+* fix pdm publish ([`eab3f51`](https://github.com/mckelvie-org/py-refresh-legacy-aws-sso-profile/commit/eab3f51302a6a57410323d1bb5ed88b9e27c5322))
+
+
+## v0.4.0 (2024-03-15)
 
 ### Unknown
 
