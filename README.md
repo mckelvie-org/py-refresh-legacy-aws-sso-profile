@@ -22,6 +22,56 @@ Table of contents
 Introduction
 ------------
 
+Some time back, AWS added direct support for IAM Identitity Center token provider credentials into its CLI and
+various AWS API language providers (e.g., boto3 for Python). This is really nice because it allows users to log into AWS
+via single-sign-on (SSO) with the ```aws sso login` command and the assistance of a browser, and appropriate session
+credentials are automatically cached and subsequently used by other CLI commands or API clients with automatic
+token refresh. See [AWS documentation](https://docs.aws.amazon.com/cli/latest/userguide/sso-configure-profile-token.html)
+for details of how to configure SSO to make this work.
+
+Setting up a profile for SSO involves a new type of profile configuration in `~/.aws/config`. For example:
+
+```ini
+[profile my-dev-profile]
+sso_session = my-sso
+sso_account_id = 123456789011
+sso_role_name = readOnly
+region = us-west-2
+output = json
+
+[sso-session my-sso]
+sso_region = us-east-1
+sso_start_url = https://my-sso-portal.awsapps.com/start
+sso_registration_scopes = sso:account:access
+```
+
+All this works great if you have a recent AWS CLI or AWS API language provider; however, if you are using an application that
+is bound to an older language provider (e.g., older versions of boto3) that does not support the new SSO profiles, the newer profile (`my-dev-profile` in the example) will be unusable by the application. The workaround for this situation is to run:
+
+```bash
+eval `aws configure export-credentials --profile my-dev-profile --format env`
+```
+
+This will set environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and `AWS_SESSION_TOKEN` to
+temporary credentials that will allow older clients to usethe session until the temporary credentials expire.
+
+While this method works, it has several problems:
+
+* It only allows a single profile to be active at a time. Applications that deal with multiple profiles are problemation
+* The credentials are only valid for the current process and child processes that inherit environment variables. It is not possible to
+  refresh SSO credentials in a different shell session and have the refresh apply to all shell sessions.
+* Child processes that inherit the environment variables do not get refreshed credentials when the parent process refreshes credentials.
+* It is awkward to pass refreshed credentials into a container environment (environment variables within the container must be
+  updated in all processes, potentially after the container has launched). It's much easier to just bind mount `~/.aws` into
+  a container.
+* Passing sensitive credentials around in environment variables increases the risk of unintentionally leaking credentials.
+
+This package provides a simple function and associated command-line tool that eliminates all of these concerns by eschewing the
+use of environment variables and instead updating an old-style credential profile in `~/.aws/credentials` with temporary
+session credentials derived from a newer SSO profile. Older applications simply need to be directed to use the derived
+profile instead of the newer SSO profile.  When temporary credentials expire, simply run this tool again and all
+clients using the derived profile will start seeing the refreshed credentials.
+
 Installation
 ------------
 
@@ -66,8 +116,7 @@ Usage
 ```text
 usage: refresh-legacy-aws-sso-profile [-h] [-p PROFILE] [-o OUTPUT_PROFILE] [-c CONFIG] [-l {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
 
-Update legacy AWS SSO profile with temporary creds from new AWS SSO profile. A simple command-line utility that reads temporary AWS credentials from a profile (which may be a newer SSO-based profile) and writes them to a different AWSprofile that can be used by tools that do not yet support the new SSO model. Since the
-derived credentials are temporary, they will eventually expire (typically 12 hours SSO refresh). After refreshing SSO credentials, you can run this utility again to update the legacy profile. By default, this utility directly manipulates the ~/.aws/credentials file. An attempt is made to preserve the file's round-trip
+Update legacy AWS SSO profile with temporary creds from new AWS SSO profile. A simple command-line utility that reads temporary AWS credentials from a profile (which may be a newer SSO-based profile) and writes them to a different AWSprofile that can be used by tools that do not yet support the new SSO model. Since the derived credentials are temporary, they will eventually expire (typically 12 hours SSO refresh). After refreshing SSO credentials, you can run this utility again to update the legacy profile. By default, this utility directly manipulates the ~/.aws/credentials file. An attempt is made to preserve the file's round-trip
 integrity.
 
 options:
